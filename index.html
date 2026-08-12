@@ -797,6 +797,7 @@
             font-weight: 500;
         }
 
+        /* ---------------- chat-page 布局优化 (取消悬浮/固定分隔) ---------------- */
         .chat-page {
             position: absolute;
             top: 0;
@@ -817,8 +818,8 @@
         }
 
         .chat-header {
-            position: absolute;
-            top: 10px;
+            position: relative;
+            top: 0;
             left: 0;
             width: 100%;
             height: 60px;
@@ -826,6 +827,10 @@
             display: flex;
             align-items: center;
             z-index: 10;
+            background-color: var(--wechat-light);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            flex-shrink: 0;
+            box-sizing: border-box;
         }
         .chat-back-btn {
             display: none;
@@ -936,7 +941,7 @@
         .chat-messages-area {
             flex: 1;
             overflow-y: auto;
-            padding: 90px 15px 100px;
+            padding: 15px;
         }
 
         .chat-timestamp {
@@ -1041,9 +1046,7 @@
         }
 
         @keyframes dot-float {
-            0%,
-            80%,
-            100% {
+            0%, 80%, 100% {
                 transform: scale(0.5);
                 opacity: 0.5;
             }
@@ -1053,22 +1056,25 @@
             }
         }
 
+        /* 底部操作区调整 (加入Flex流程) */
         .chat-footer {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
+            position: relative;
+            bottom: 0;
+            left: 0;
+            transform: none;
+            width: 100%;
             display: flex;
             align-items: center;
             gap: 10px;
             z-index: 11;
-            transition: transform 0.3s ease-in-out;
+            background: var(--wechat-light);
+            padding: 10px 15px;
+            padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            flex-shrink: 0;
+            box-sizing: border-box;
         }
-        .chat-footer.panel-active {
-            transform: translate(-50%, -30vh);
-        }
-
+        
         .chat-actions-btn {
             width: 44px;
             height: 44px;
@@ -1131,18 +1137,10 @@
             background-color: #1C1C1E;
             border-radius: 2px;
         }
-        .send-bars-icon span:nth-child(1) {
-            height: 14px;
-        }
-        .send-bars-icon span:nth-child(2) {
-            height: 20px;
-        }
-        .send-bars-icon span:nth-child(3) {
-            height: 10px;
-        }
-        .send-bars-icon span:nth-child(4) {
-            height: 16px;
-        }
+        .send-bars-icon span:nth-child(1) { height: 14px; }
+        .send-bars-icon span:nth-child(2) { height: 20px; }
+        .send-bars-icon span:nth-child(3) { height: 10px; }
+        .send-bars-icon span:nth-child(4) { height: 16px; }
 
         .send-arrow-icon {
             display: none;
@@ -1157,21 +1155,25 @@
         }
 
         .chat-bottom-panel {
-            position: absolute;
+            position: relative;
             bottom: 0;
-            left: 5%;
-            width: 90%;
-            height: 30vh;
-            background: white;
-            border-radius: 20px 20px 0 0;
+            left: 0;
+            width: 100%;
+            height: auto;
+            min-height: 250px;
+            background: var(--wechat-light);
+            border-radius: 0;
             z-index: 10;
-            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.1);
-            transform: translateY(100%);
-            transition: transform 0.3s ease-in-out;
+            box-shadow: none;
+            transform: none;
             padding: 20px;
+            display: none;
+            flex-shrink: 0;
+            box-sizing: border-box;
+            border-top: 1px solid #E5E5EA;
         }
         .chat-bottom-panel.active {
-            transform: translateY(0);
+            display: block;
         }
         
         .panel-actions-grid {
@@ -1191,7 +1193,7 @@
         .panel-action-icon {
             width: 56px;
             height: 56px;
-            background: #f6f6f6;
+            background: #ffffff;
             border-radius: 16px;
             display: flex;
             justify-content: center;
@@ -1200,6 +1202,7 @@
             color: #333;
             margin-bottom: 6px;
             transition: background 0.2s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
         
         .panel-action-btn:active .panel-action-icon {
@@ -1209,6 +1212,90 @@
         .panel-action-label {
             font-size: 11px;
             color: #666;
+        }
+
+        /* 修改了多选工具栏为相对于底部吸附 */
+        .select-mode-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 72px;
+            background: rgba(255, 255, 255, 0.97);
+            backdrop-filter: blur(12px);
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 28px;
+            box-shadow: 0 -2px 16px rgba(0, 0, 0, 0.08);
+            z-index: 50;
+            border-top: 1px solid rgba(0, 0, 0, 0.06);
+            border-radius: 20px 20px 0 0;
+        }
+        .select-mode-bar.active {
+            display: flex;
+        }
+
+        /* 引用栏布局修正，跟随内容 */
+        .quote-preview-bar {
+            display: none;
+            align-items: center;
+            padding: 10px 16px;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            gap: 12px;
+            position: relative;
+            bottom: auto;
+            left: auto;
+            width: calc(100% - 30px);
+            margin: 0 15px 10px 15px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            z-index: 20;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            box-sizing: border-box;
+            flex-shrink: 0;
+        }
+        .quote-preview-bar.active {
+            display: flex;
+        }
+        .quote-preview-line {
+            width: 3px;
+            min-height: 28px;
+            height: 100%;
+            background: #2c2c2e;
+            border-radius: 2px;
+            flex-shrink: 0;
+        }
+        .quote-preview-content {
+            flex: 1;
+            overflow: hidden;
+        }
+        .quote-preview-name {
+            font-size: 12px;
+            font-weight: 600;
+            color: #444;
+            margin-bottom: 2px;
+        }
+        .quote-preview-text {
+            font-size: 13px;
+            color: #666;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .quote-preview-close {
+            color: #aaa;
+            cursor: pointer;
+            font-size: 18px;
+            line-height: 1;
+            flex-shrink: 0;
+            padding: 4px;
+            transition: color 0.15s;
+        }
+        .quote-preview-close:active {
+            color: #777;
         }
 
         .contacts-page,
@@ -2219,26 +2306,6 @@
             display: block;
         }
 
-        .select-mode-bar {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 72px;
-            background: rgba(255, 255, 255, 0.97);
-            backdrop-filter: blur(12px);
-            display: none;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 28px;
-            box-shadow: 0 -2px 16px rgba(0, 0, 0, 0.08);
-            z-index: 50;
-            border-top: 1px solid rgba(0, 0, 0, 0.06);
-            border-radius: 20px 20px 0 0;
-        }
-        .select-mode-bar.active {
-            display: flex;
-        }
         .select-cancel-btn {
             font-size: 15px;
             color: #666;
@@ -2262,66 +2329,6 @@
         }
         .select-delete-btn.enabled {
             opacity: 1;
-        }
-
-        /* ========== 引用预览条 ========== */
-        .quote-preview-bar {
-            display: none;
-            align-items: center;
-            padding: 10px 16px;
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            gap: 12px;
-            position: absolute;
-            bottom: 76px;
-            left: calc(5% + 54px);
-            width: calc(90% - 54px);
-            border-radius: 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-            z-index: 20;
-            border: 1px solid rgba(0, 0, 0, 0.04);
-            box-sizing: border-box;
-        }
-        .quote-preview-bar.active {
-            display: flex;
-        }
-        .quote-preview-line {
-            width: 3px;
-            min-height: 28px;
-            height: 100%;
-            background: #2c2c2e;
-            border-radius: 2px;
-            flex-shrink: 0;
-        }
-        .quote-preview-content {
-            flex: 1;
-            overflow: hidden;
-        }
-        .quote-preview-name {
-            font-size: 12px;
-            font-weight: 600;
-            color: #444;
-            margin-bottom: 2px;
-        }
-        .quote-preview-text {
-            font-size: 13px;
-            color: #666;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-        .quote-preview-close {
-            color: #aaa;
-            cursor: pointer;
-            font-size: 18px;
-            line-height: 1;
-            flex-shrink: 0;
-            padding: 4px;
-            transition: color 0.15s;
-        }
-        .quote-preview-close:active {
-            color: #777;
         }
 
         /* ========== 气泡内引用块 - 简洁韩系风格 ========== */
@@ -2628,7 +2635,9 @@
                 </div>
             </div>
 
+            <!-- Chat Page 的结构已优化，取消了绝对定位悬浮，回归 Flex 布局 -->
             <div class="chat-page" id="chat-page">
+                <!-- 顶栏 -->
                 <div class="chat-header">
                     <div class="chat-back-btn" id="chat-back-btn"><i class="fa-solid fa-chevron-left"></i></div>
                     <div class="chat-avatar-wrapper" id="chat-avatar-wrapper">
@@ -2651,8 +2660,20 @@
                     </div>
                 </div>
 
+                <!-- 消息内容区 -->
                 <div class="chat-messages-area" id="chat-messages-area"></div>
 
+                <!-- 引用预览条 -->
+                <div class="quote-preview-bar" id="quote-preview-bar">
+                    <div class="quote-preview-line"></div>
+                    <div class="quote-preview-content">
+                        <div class="quote-preview-name" id="quote-preview-name"></div>
+                        <div class="quote-preview-text" id="quote-preview-text"></div>
+                    </div>
+                    <div class="quote-preview-close" id="quote-preview-close">×</div>
+                </div>
+
+                <!-- 底部输入底栏 -->
                 <div class="chat-footer" id="chat-footer">
                     <div class="chat-actions-btn" id="chat-actions-btn"><i class="fa-solid fa-plus"></i></div>
                     <div class="chat-input-wrapper">
@@ -2664,24 +2685,22 @@
                     </div>
                 </div>
 
+                <!-- 底部功能面板 -->
                 <div class="chat-bottom-panel" id="chat-bottom-panel">
                     <div class="panel-actions-grid">
                         <div class="panel-action-btn" id="panel-regenerate-btn">
                             <div class="panel-action-icon"><i class="fa-solid fa-rotate-right"></i></div>
                             <div class="panel-action-label">重新生成</div>
                         </div>
+                        <!-- 新增一键清空按钮 -->
+                        <div class="panel-action-btn" id="panel-clear-btn">
+                            <div class="panel-action-icon"><i class="fa-solid fa-trash"></i></div>
+                            <div class="panel-action-label">清空记录</div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="quote-preview-bar" id="quote-preview-bar">
-                    <div class="quote-preview-line"></div>
-                    <div class="quote-preview-content">
-                        <div class="quote-preview-name" id="quote-preview-name"></div>
-                        <div class="quote-preview-text" id="quote-preview-text"></div>
-                    </div>
-                    <div class="quote-preview-close" id="quote-preview-close">×</div>
-                </div>
-
+                <!-- 批量多选功能栏 -->
                 <div class="select-mode-bar" id="select-mode-bar">
                     <div class="select-cancel-btn" id="select-cancel-btn">取消</div>
                     <div class="select-count-text" id="select-count-text">未选择</div>
@@ -3099,7 +3118,6 @@
                 const sendBtnWrapper = document.getElementById('chat-send-btn-wrapper');
                 const actionsBtn = document.getElementById('chat-actions-btn');
                 const bottomPanel = document.getElementById('chat-bottom-panel');
-                const chatFooter = document.getElementById('chat-footer');
                 this.pendingMessages = [];
                 this.isAiResponding = false;
                 document.getElementById('chat-avatar-wrapper').addEventListener('click', () => this.closeChatPage());
@@ -3119,17 +3137,52 @@
                             chatInput.value = '';
                             sendBtnWrapper.classList.remove('has-input'); } }
                 });
-                actionsBtn.addEventListener('click', () => { bottomPanel.classList.toggle('active');
-                    chatFooter.classList.toggle('panel-active'); });
+                
+                actionsBtn.addEventListener('click', () => { 
+                    bottomPanel.classList.toggle('active');
+                    // 开启面板时自动滚动到底部以防消息被遮挡
+                    if (bottomPanel.classList.contains('active')) {
+                        setTimeout(() => {
+                            const messagesArea = document.getElementById('chat-messages-area');
+                            messagesArea.scrollTop = messagesArea.scrollHeight;
+                        }, 50);
+                    }
+                });
                 
                 // 重回(重新生成)功能绑定
                 document.getElementById('panel-regenerate-btn').addEventListener('click', () => {
                     this.regenerateLastResponse();
                     bottomPanel.classList.remove('active');
-                    chatFooter.classList.remove('panel-active');
+                });
+                
+                // 清空聊天记录功能绑定
+                document.getElementById('panel-clear-btn').addEventListener('click', () => {
+                    this.clearChatHistory();
+                    bottomPanel.classList.remove('active');
                 });
                 
                 this.initBubbleContextMenu();
+            }
+            
+            // 清空当前界面的对话历史与DOM呈现，永远保留 System Prompt 防止崩盘
+            clearChatHistory() {
+                if (!this.currentChatId) return;
+                
+                if (confirm('⚠️ 确定要清空当前全部聊天记录吗？清空后操作不可恢复，但角色人设记忆将会保留。')) {
+                    this.chatDisplayMessages[this.currentChatId] = [];
+                    
+                    // 仅保留系统提示词，丢弃其他上下文
+                    const systemPrompts = this.currentChatHistory.filter(m => m.role === 'system');
+                    this.currentChatHistory = [...systemPrompts];
+                    
+                    const messagesArea = document.getElementById('chat-messages-area');
+                    messagesArea.innerHTML = '';
+                    
+                    this.addMessageToChat('Today', 'timestamp');
+                    this.saveCurrentChat();
+                    
+                    this.showSuccess('聊天记录已清空');
+                }
             }
 
             addUserMessage(message) {
@@ -3446,6 +3499,20 @@
                 this.currentChatHistory.push({ role: 'user', content: message });
                 this.triggerAiResponse(); }
 
+            // 获取经过裁剪优化的对话历史，防止API突破最大长度或导致遗忘核心人设
+            getOptimizedHistory() {
+                const MAX_RECENT_MSGS = 40; // 提取最近的40条历史对话以控制上下文，防止降智
+                if (this.currentChatHistory.length <= MAX_RECENT_MSGS + 1) {
+                    return this.currentChatHistory;
+                }
+                // 强制抽离并保留最重要的 System Prompts（人设预设永远优先保留）
+                const sysPrompts = this.currentChatHistory.filter(m => m.role === 'system');
+                const otherMsgs = this.currentChatHistory.filter(m => m.role !== 'system');
+                
+                const recentMsgs = otherMsgs.slice(-MAX_RECENT_MSGS);
+                return [...sysPrompts, ...recentMsgs];
+            }
+
             async triggerAiResponse() {
                 if (!this.activePreset || !this.activePreset.url || !this.activePreset.key) {
                     const errMsg = "AI not configured. Please set up an active preset in API Settings.";
@@ -3457,8 +3524,13 @@
                 statusEl.textContent = "Typing...";
                 const typingBubble = this.addMessageToChat('', 'typing-indicator');
                 try {
-                    const payload = { model: this.activePreset.model, messages: this.currentChatHistory,
-                        temperature: this.activePreset.temperature, stream: false };
+                    const payload = { 
+                        model: this.activePreset.model, 
+                        // 改为调用防降智与截断优化后的历史消息方法
+                        messages: this.getOptimizedHistory(),
+                        temperature: this.activePreset.temperature, 
+                        stream: false 
+                    };
                     const response = await this.makeApiRequest(this.activePreset.url, { method: 'POST',
                         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${this.activePreset
                                 .key}` }, body: JSON.stringify(payload) });
