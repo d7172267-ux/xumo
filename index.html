@@ -34,11 +34,6 @@
             --k-radius-button: 15px;
             --k-modal-bg: rgba(252, 252, 252, 0.9);
             --k-modal-backdrop: rgba(0, 0, 0, 0.3);
-            --night-bg: #1C1C1E;
-            --night-card: #2C2C2E;
-            --night-text: #F2F2F7;
-            --night-gray: #8E8E93;
-            --night-border: #3A3A3C;
         }
 
         * {
@@ -528,7 +523,6 @@
             display: none;
         }
 
-        /* ===== WeChat主界面 ===== */
         .wechat-page {
             position: absolute;
             top: 0;
@@ -556,8 +550,6 @@
             z-index: 10;
             height: 60px;
             flex-shrink: 0;
-            /* ✅ 去掉了分割线，用背景色块区分 */
-            border-bottom: none;
         }
 
         .back-btn {
@@ -611,10 +603,9 @@
             justify-content: space-around;
             border-radius: var(--border-radius);
             margin: 12px 10%;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
             width: 80%;
             align-self: center;
-            /* 用背景色区分，去掉边框 */
-            border-bottom: none;
         }
 
         .tab-item {
@@ -670,9 +661,6 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
-        .chat-item.pinned {
-            border-left: 4px solid var(--wechat-green);
-        }
 
         .chat-avatar {
             width: 56px;
@@ -711,25 +699,6 @@
             margin-top: 5px;
         }
 
-        /* 群聊标签 */
-        .chat-item .group-badge {
-            display: inline-block;
-            background: var(--wechat-green);
-            color: white;
-            font-size: 9px;
-            padding: 1px 6px;
-            border-radius: 8px;
-            margin-right: 6px;
-            font-weight: 600;
-            vertical-align: middle;
-        }
-
-        .chat-item .pin-icon {
-            color: var(--wechat-green);
-            font-size: 12px;
-            margin-left: 6px;
-        }
-
         .wechat-dock {
             background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(20px);
@@ -741,9 +710,8 @@
             box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.1);
             margin: 10px auto 20px;
             width: 90%;
+            border: 1px solid rgba(0, 0, 0, 0.05);
             flex-shrink: 0;
-            /* 用背景色区分，去掉边框 */
-            border: none;
         }
 
         .dock-item-wechat {
@@ -829,7 +797,7 @@
             font-weight: 500;
         }
 
-        /* ===== 聊天页面 ===== */
+        /* ---------------- chat-page 布局优化 (取消悬浮/固定分隔) ---------------- */
         .chat-page {
             position: absolute;
             top: 0;
@@ -860,10 +828,10 @@
             align-items: center;
             z-index: 10;
             background-color: var(--wechat-light);
+            border-bottom: 1px solid #D1D1D6;
             flex-shrink: 0;
             box-sizing: border-box;
-            /* ✅ 去掉了分割线 */
-            border-bottom: none;
+            box-shadow: none;
         }
         .chat-back-btn {
             display: none;
@@ -1079,9 +1047,7 @@
         }
 
         @keyframes dot-float {
-            0%,
-            80%,
-            100% {
+            0%, 80%, 100% {
                 transform: scale(0.5);
                 opacity: 0.5;
             }
@@ -1091,7 +1057,7 @@
             }
         }
 
-        /* 底部输入栏 */
+        /* 底部操作区调整 (加入Flex流程) */
         .chat-footer {
             position: relative;
             bottom: 0;
@@ -1105,12 +1071,12 @@
             background: var(--wechat-light);
             padding: 10px 15px;
             padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+            border-top: 1px solid #D1D1D6;
             flex-shrink: 0;
             box-sizing: border-box;
-            /* ✅ 去掉了分割线 */
-            border-top: none;
+            box-shadow: none;
         }
-
+        
         .chat-actions-btn {
             width: 44px;
             height: 44px;
@@ -1173,18 +1139,10 @@
             background-color: #1C1C1E;
             border-radius: 2px;
         }
-        .send-bars-icon span:nth-child(1) {
-            height: 14px;
-        }
-        .send-bars-icon span:nth-child(2) {
-            height: 20px;
-        }
-        .send-bars-icon span:nth-child(3) {
-            height: 10px;
-        }
-        .send-bars-icon span:nth-child(4) {
-            height: 16px;
-        }
+        .send-bars-icon span:nth-child(1) { height: 14px; }
+        .send-bars-icon span:nth-child(2) { height: 20px; }
+        .send-bars-icon span:nth-child(3) { height: 10px; }
+        .send-bars-icon span:nth-child(4) { height: 16px; }
 
         .send-arrow-icon {
             display: none;
@@ -1214,27 +1172,26 @@
             display: none;
             flex-shrink: 0;
             box-sizing: border-box;
-            /* 用背景色区分，去掉边框 */
-            border-top: none;
+            border-top: 1px solid #D1D1D6;
         }
         .chat-bottom-panel.active {
             display: block;
         }
-
+        
         .panel-actions-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 15px;
             margin-top: 5px;
         }
-
+        
         .panel-action-btn {
             display: flex;
             flex-direction: column;
             align-items: center;
             cursor: pointer;
         }
-
+        
         .panel-action-icon {
             width: 56px;
             height: 56px;
@@ -1247,39 +1204,43 @@
             color: #333;
             margin-bottom: 6px;
             transition: background 0.2s;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
-
+        
         .panel-action-btn:active .panel-action-icon {
             background: #e5e5ea;
         }
-
+        
         .panel-action-label {
             font-size: 11px;
             color: #666;
         }
 
+        /* 修改了多选工具栏为完全取消悬浮、加入流的固定底栏 */
         .select-mode-bar {
-            position: absolute;
-            bottom: 0;
-            left: 0;
+            position: relative;
+            bottom: auto;
+            left: auto;
             width: 100%;
             height: 72px;
-            background: rgba(255, 255, 255, 0.97);
-            backdrop-filter: blur(12px);
+            background: var(--wechat-light);
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
             display: none;
             align-items: center;
             justify-content: space-between;
             padding: 0 28px;
-            box-shadow: 0 -2px 16px rgba(0, 0, 0, 0.08);
+            box-shadow: none;
             z-index: 50;
-            border-top: 1px solid rgba(0, 0, 0, 0.06);
-            border-radius: 20px 20px 0 0;
+            border-top: 1px solid #D1D1D6;
+            border-radius: 0;
+            flex-shrink: 0;
         }
         .select-mode-bar.active {
             display: flex;
         }
 
+        /* 引用栏布局修正，跟随内容 */
         .quote-preview-bar {
             display: none;
             align-items: center;
@@ -1472,8 +1433,7 @@
         .create-role-page,
         .me-page,
         .settings-page,
-        .api-settings-page,
-        .create-group-page {
+        .api-settings-page {
             position: absolute;
             top: 0;
             left: 0;
@@ -1488,15 +1448,13 @@
         .create-role-page.active,
         .me-page.active,
         .settings-page.active,
-        .api-settings-page.active,
-        .create-group-page.active {
+        .api-settings-page.active {
             display: flex;
         }
 
         .role-form,
         .me-form,
-        .settings-content,
-        .group-form {
+        .settings-content {
             flex: 1;
             padding: 20px;
             overflow-y: auto;
@@ -2144,6 +2102,7 @@
             font-weight: 500;
         }
 
+        /* ========== 气泡长按菜单 - 白底黑字韩系风格 ========== */
         .bubble-context-menu {
             position: fixed;
             z-index: 88888;
@@ -2211,6 +2170,7 @@
             flex-shrink: 0;
         }
 
+        /* ========== 编辑消息弹窗 - 黑白韩系风格 ========== */
         .edit-msg-overlay {
             position: fixed;
             inset: 0;
@@ -2296,6 +2256,7 @@
             background: #333;
         }
 
+        /* ========== 选择模式 ========== */
         .message-bubble.selectable {
             cursor: pointer;
             transition: margin 0.2s ease;
@@ -2374,6 +2335,7 @@
             opacity: 1;
         }
 
+        /* ========== 气泡内引用块 - 简洁韩系风格 ========== */
         .quoted-block {
             border-radius: 8px;
             padding: 6px 10px;
@@ -2423,6 +2385,7 @@
             color: rgba(255, 255, 255, 0.7);
         }
 
+        /* ========== 转发底部弹窗 ========== */
         .forward-overlay {
             position: fixed;
             inset: 0;
@@ -2557,446 +2520,11 @@
         .forward-cancel:active {
             background: #f0f0f0;
         }
-
-        /* ===== 群聊成员列表样式 ===== */
-        .group-members-preview {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            margin-top: 4px;
-            flex-wrap: wrap;
-        }
-        .group-member-avatar-mini {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 1px solid #e0e0e0;
-        }
-        .group-member-count {
-            font-size: 10px;
-            color: var(--wechat-gray);
-            margin-left: 4px;
-        }
-
-        /* ===== 群聊创建-成员选择 ===== */
-        .member-select-list {
-            max-height: 300px;
-            overflow-y: auto;
-            margin: 10px 0;
-        }
-        .member-select-item {
-            display: flex;
-            align-items: center;
-            padding: 10px 14px;
-            border-bottom: 1px solid #f0f0f0;
-            cursor: pointer;
-            transition: background 0.15s;
-        }
-        .member-select-item:active {
-            background: #f5f5f5;
-        }
-        .member-select-item.selected {
-            background: rgba(7, 193, 96, 0.08);
-        }
-        .member-select-item .ms-avatar {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-right: 12px;
-        }
-        .member-select-item .ms-name {
-            flex: 1;
-            font-size: 15px;
-            font-weight: 500;
-            color: var(--wechat-dark);
-        }
-        .member-select-item .ms-check {
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            border: 2px solid #ccc;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.15s;
-            font-size: 12px;
-            color: white;
-        }
-        .member-select-item.selected .ms-check {
-            background: var(--wechat-green);
-            border-color: var(--wechat-green);
-        }
-
-        /* ===== 已读回执标记 ===== */
-        .read-receipt {
-            font-size: 10px;
-            color: var(--wechat-gray);
-            margin-top: 2px;
-            text-align: right;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            gap: 4px;
-        }
-        .read-receipt .read-count {
-            font-weight: 500;
-        }
-        .read-receipt .unread-count {
-            color: #ccc;
-        }
-
-        /* ===== 撤回消息样式 ===== */
-        .message-bubble.recalled .message-content {
-            background: transparent !important;
-            color: var(--wechat-gray) !important;
-            font-style: italic;
-            font-size: 13px;
-            padding: 4px 8px;
-        }
-        .message-bubble.recalled .message-content span {
-            color: var(--wechat-gray) !important;
-        }
-        .message-bubble.recalled.has-tail::after {
-            display: none !important;
-        }
-
-        /* 群聊标题显示成员数 */
-        .chat-peer-status .member-count {
-            font-weight: 500;
-            color: var(--wechat-green);
-        }
-
-        /* 夜间模式 */
-        .iphone-wrapper.night-mode {
-            background-color: var(--night-bg) !important;
-        }
-        .iphone-wrapper.night-mode .wechat-page,
-        .iphone-wrapper.night-mode .chat-page,
-        .iphone-wrapper.night-mode .contacts-page,
-        .iphone-wrapper.night-mode .discover-page,
-        .iphone-wrapper.night-mode .me-page,
-        .iphone-wrapper.night-mode .settings-page,
-        .iphone-wrapper.night-mode .api-settings-page,
-        .iphone-wrapper.night-mode .create-role-page,
-        .iphone-wrapper.night-mode .create-group-page {
-            background-color: var(--night-bg) !important;
-        }
-        .iphone-wrapper.night-mode .wechat-header,
-        .iphone-wrapper.night-mode .chat-header,
-        .iphone-wrapper.night-mode .wechat-tabs,
-        .iphone-wrapper.night-mode .chat-item,
-        .iphone-wrapper.night-mode .contact-item,
-        .iphone-wrapper.night-mode .discover-item,
-        .iphone-wrapper.night-mode .settings-item,
-        .iphone-wrapper.night-mode .k-card,
-        .iphone-wrapper.night-mode .form-group,
-        .iphone-wrapper.night-mode .me-profile-card,
-        .iphone-wrapper.night-mode .info-card,
-        .iphone-wrapper.night-mode .chat-menu-plate,
-        .iphone-wrapper.night-mode .chat-actions-btn,
-        .iphone-wrapper.night-mode .chat-input-wrapper,
-        .iphone-wrapper.night-mode .panel-action-icon,
-        .iphone-wrapper.night-mode .wechat-dock,
-        .iphone-wrapper.night-mode .member-select-item {
-            background-color: var(--night-card) !important;
-            color: var(--night-text) !important;
-            border-color: var(--night-border) !important;
-        }
-        .iphone-wrapper.night-mode .wechat-title,
-        .iphone-wrapper.night-mode .chat-peer-name-plate,
-        .iphone-wrapper.night-mode .chat-name,
-        .iphone-wrapper.night-mode .contact-name,
-        .iphone-wrapper.night-mode .discover-title,
-        .iphone-wrapper.night-mode .settings-title,
-        .iphone-wrapper.night-mode .k-label,
-        .iphone-wrapper.night-mode .form-label,
-        .iphone-wrapper.night-mode .me-nickname,
-        .iphone-wrapper.night-mode .info-title,
-        .iphone-wrapper.night-mode .menu-title,
-        .iphone-wrapper.night-mode .modal-title {
-            color: var(--night-text) !important;
-        }
-        .iphone-wrapper.night-mode .chat-last-message,
-        .iphone-wrapper.night-mode .chat-time,
-        .iphone-wrapper.night-mode .contact-status,
-        .iphone-wrapper.night-mode .discover-desc,
-        .iphone-wrapper.night-mode .settings-desc,
-        .iphone-wrapper.night-mode .k-preset-placeholder,
-        .iphone-wrapper.night-mode .wechat-gray,
-        .iphone-wrapper.night-mode .chat-peer-status,
-        .iphone-wrapper.night-mode .dock-label-wechat,
-        .iphone-wrapper.night-mode .panel-action-label {
-            color: var(--night-gray) !important;
-        }
-        .iphone-wrapper.night-mode .chat-input,
-        .iphone-wrapper.night-mode .k-input,
-        .iphone-wrapper.night-mode .k-select,
-        .iphone-wrapper.night-mode .form-input,
-        .iphone-wrapper.night-mode .me-bio,
-        .iphone-wrapper.night-mode .info-value {
-            color: var(--night-text) !important;
-            background-color: var(--night-card) !important;
-            border-color: var(--night-border) !important;
-        }
-        .iphone-wrapper.night-mode .chat-input::placeholder {
-            color: var(--night-gray) !important;
-        }
-        .iphone-wrapper.night-mode .message-bubble.ai .message-content {
-            background-color: var(--night-card) !important;
-            color: var(--night-text) !important;
-        }
-        .iphone-wrapper.night-mode .message-bubble.user .message-content {
-            background-color: var(--wechat-green) !important;
-            color: white !important;
-        }
-        .iphone-wrapper.night-mode .message-bubble.ai.has-tail::after {
-            background-color: var(--night-card) !important;
-        }
-        .iphone-wrapper.night-mode .chat-timestamp {
-            color: var(--night-gray) !important;
-        }
-        .iphone-wrapper.night-mode .back-btn,
-        .iphone-wrapper.night-mode .add-btn,
-        .iphone-wrapper.night-mode .chat-menu-icon,
-        .iphone-wrapper.night-mode .chat-actions-btn,
-        .iphone-wrapper.night-mode .send-bars-icon span,
-        .iphone-wrapper.night-mode .send-arrow-icon {
-            color: var(--night-text) !important;
-        }
-        .iphone-wrapper.night-mode .lines-icon::before,
-        .iphone-wrapper.night-mode .lines-icon::after {
-            background: var(--night-text) !important;
-        }
-        .iphone-wrapper.night-mode .dock-icon-wechat {
-            color: var(--night-gray) !important;
-        }
-        .iphone-wrapper.night-mode .dock-item-wechat.active .dock-icon-wechat {
-            color: var(--wechat-green) !important;
-        }
-        .iphone-wrapper.night-mode .dock-item-wechat.active .dock-label-wechat {
-            color: var(--wechat-green) !important;
-        }
-        .iphone-wrapper.night-mode .chat-bottom-panel {
-            background-color: var(--night-bg) !important;
-            border-top-color: var(--night-border) !important;
-        }
-        .iphone-wrapper.night-mode .select-mode-bar {
-            background: rgba(44, 44, 46, 0.97) !important;
-            border-top-color: var(--night-border) !important;
-        }
-        .iphone-wrapper.night-mode .select-count-text {
-            color: var(--night-text) !important;
-        }
-        .iphone-wrapper.night-mode .select-cancel-btn {
-            color: var(--night-gray) !important;
-        }
-        .iphone-wrapper.night-mode .quote-preview-bar {
-            background: rgba(44, 44, 46, 0.92) !important;
-            border-color: var(--night-border) !important;
-        }
-        .iphone-wrapper.night-mode .quote-preview-name {
-            color: var(--night-text) !important;
-        }
-        .iphone-wrapper.night-mode .quote-preview-text {
-            color: var(--night-gray) !important;
-        }
-        .iphone-wrapper.night-mode .chat-footer {
-            background: var(--night-bg) !important;
-            border-top-color: var(--night-border) !important;
-        }
-        .iphone-wrapper.night-mode .wechat-dock {
-            border-color: var(--night-border) !important;
-        }
-        .iphone-wrapper.night-mode .empty-state {
-            color: var(--night-gray) !important;
-        }
-        .iphone-wrapper.night-mode .bubble-context-menu {
-            background: rgba(44, 44, 46, 0.96) !important;
-            border-color: var(--night-border) !important;
-        }
-        .iphone-wrapper.night-mode .bcm-item i {
-            color: var(--night-text) !important;
-        }
-        .iphone-wrapper.night-mode .bcm-label {
-            color: var(--night-gray) !important;
-        }
-        .iphone-wrapper.night-mode .bcm-item.danger i {
-            color: #ff6b6b !important;
-        }
-        .iphone-wrapper.night-mode .bcm-item.danger .bcm-label {
-            color: #ff6b6b !important;
-        }
-        .iphone-wrapper.night-mode .edit-msg-modal {
-            background: var(--night-card) !important;
-            border-color: var(--night-border) !important;
-        }
-        .iphone-wrapper.night-mode .edit-msg-title {
-            color: var(--night-text) !important;
-            border-bottom-color: var(--night-border) !important;
-        }
-        .iphone-wrapper.night-mode .edit-msg-textarea {
-            background: var(--night-bg) !important;
-            color: var(--night-text) !important;
-            border-color: var(--night-border) !important;
-        }
-        .iphone-wrapper.night-mode .edit-msg-btn.cancel {
-            background: var(--night-bg) !important;
-            color: var(--night-gray) !important;
-        }
-        .iphone-wrapper.night-mode .edit-msg-btn.save {
-            background: var(--wechat-green) !important;
-            color: white !important;
-        }
-        .iphone-wrapper.night-mode .forward-sheet {
-            background: var(--night-card) !important;
-        }
-        .iphone-wrapper.night-mode .forward-title {
-            color: var(--night-gray) !important;
-        }
-        .iphone-wrapper.night-mode .forward-option {
-            background: var(--night-card) !important;
-            color: var(--night-text) !important;
-            border-color: var(--night-border) !important;
-        }
-        .iphone-wrapper.night-mode .forward-cancel {
-            background: var(--night-card) !important;
-            color: var(--night-text) !important;
-        }
-        .iphone-wrapper.night-mode .forward-role-name {
-            color: var(--night-gray) !important;
-        }
-        .iphone-wrapper.night-mode .forward-empty-hint {
-            color: var(--night-gray) !important;
-        }
-        .iphone-wrapper.night-mode .k-modal {
-            background: var(--night-card) !important;
-            border-color: var(--night-border) !important;
-        }
-        .iphone-wrapper.night-mode .k-modal-title {
-            color: var(--night-text) !important;
-            border-bottom-color: var(--night-border) !important;
-        }
-        .iphone-wrapper.night-mode .k-modal-item {
-            color: var(--night-text) !important;
-        }
-        .iphone-wrapper.night-mode .k-modal-item:active {
-            background: rgba(255, 255, 255, 0.05) !important;
-        }
-        .iphone-wrapper.night-mode .k-modal-footer {
-            border-top-color: var(--night-border) !important;
-        }
-        .iphone-wrapper.night-mode .test-result-content {
-            color: var(--night-text) !important;
-        }
-        .iphone-wrapper.night-mode .test-result-content .error-reason {
-            background: var(--night-bg) !important;
-        }
-        .iphone-wrapper.night-mode .test-result-content .solution {
-            background: rgba(7, 193, 96, 0.15) !important;
-        }
-        .iphone-wrapper.night-mode .wechat-modal {
-            background: var(--night-card) !important;
-            border-color: var(--night-border) !important;
-        }
-        .iphone-wrapper.night-mode .modal-option {
-            color: #5AC8FA !important;
-            border-top-color: var(--night-border) !important;
-        }
-        .iphone-wrapper.night-mode .modal-option.cancel {
-            color: #FF6B6B !important;
-        }
-        .iphone-wrapper.night-mode .chat-menu {
-            background: var(--night-card) !important;
-            border-color: var(--night-border) !important;
-        }
-        .iphone-wrapper.night-mode .chat-menu .menu-item {
-            color: #5AC8FA !important;
-            border-bottom-color: var(--night-border) !important;
-        }
-        .iphone-wrapper.night-mode .chat-menu .menu-item.danger {
-            color: #FF6B6B !important;
-        }
-        .iphone-wrapper.night-mode .chat-menu .menu-item.cancel {
-            color: #5AC8FA !important;
-            border-top-color: var(--night-border) !important;
-        }
-        .iphone-wrapper.night-mode .model-select-modal {
-            background: var(--night-card) !important;
-            border-color: var(--night-border) !important;
-        }
-        .iphone-wrapper.night-mode .model-option {
-            color: var(--night-text) !important;
-            border-bottom-color: var(--night-border) !important;
-        }
-        .iphone-wrapper.night-mode .model-option:hover {
-            background: rgba(255, 255, 255, 0.05) !important;
-        }
-        .iphone-wrapper.night-mode .model-select-modal .menu-title {
-            border-bottom-color: var(--night-border) !important;
-        }
-        .iphone-wrapper.night-mode .edit-menu {
-            background: var(--night-card) !important;
-            border-color: var(--night-border) !important;
-        }
-        .iphone-wrapper.night-mode .edit-menu .menu-title {
-            color: var(--night-gray) !important;
-            border-bottom-color: var(--night-border) !important;
-        }
-        .iphone-wrapper.night-mode .edit-menu .menu-item {
-            color: #5AC8FA !important;
-            border-bottom-color: var(--night-border) !important;
-        }
-        .iphone-wrapper.night-mode .edit-menu .menu-item.danger {
-            color: #FF6B6B !important;
-        }
-        .iphone-wrapper.night-mode .edit-menu .menu-item.cancel {
-            color: #5AC8FA !important;
-            border-top-color: var(--night-border) !important;
-        }
-        .iphone-wrapper.night-mode .group-member-avatar-mini {
-            border-color: var(--night-border) !important;
-        }
-        .iphone-wrapper.night-mode .member-select-item {
-            border-bottom-color: var(--night-border) !important;
-        }
-        .iphone-wrapper.night-mode .member-select-item .ms-check {
-            border-color: var(--night-border) !important;
-        }
-        .iphone-wrapper.night-mode .member-select-item.selected .ms-check {
-            background: var(--wechat-green) !important;
-            border-color: var(--wechat-green) !important;
-        }
-        .iphone-wrapper.night-mode .chat-item.pinned {
-            border-left-color: var(--wechat-green) !important;
-        }
-        .iphone-wrapper.night-mode .chat-item .group-badge {
-            background: var(--wechat-green) !important;
-        }
-        .iphone-wrapper.night-mode .read-receipt {
-            color: var(--night-gray) !important;
-        }
-        .iphone-wrapper.night-mode .read-receipt .read-count {
-            color: var(--night-text) !important;
-        }
-        .iphone-wrapper.night-mode .message-bubble.recalled .message-content {
-            color: var(--night-gray) !important;
-        }
-        .iphone-wrapper.night-mode .message-bubble.recalled .message-content span {
-            color: var(--night-gray) !important;
-        }
-        .iphone-wrapper.night-mode .group-members-preview .group-member-count {
-            color: var(--night-gray) !important;
-        }
-        .iphone-wrapper.night-mode .chat-peer-status .member-count {
-            color: var(--wechat-green) !important;
-        }
     </style>
 </head>
 <body>
 
-    <div class="iphone-wrapper" id="app-wrapper">
+    <div class="iphone-wrapper">
         <div id="main-interface" class="main-interface active">
             <div class="header-section">
                 <div id="top-bg" data-edit-key="top-bg" class="editable header-card-bg bg-cover"></div>
@@ -3111,8 +2639,8 @@
                 </div>
             </div>
 
-            <!-- Chat Page -->
             <div class="chat-page" id="chat-page">
+                <!-- 顶栏 -->
                 <div class="chat-header">
                     <div class="chat-back-btn" id="chat-back-btn"><i class="fa-solid fa-chevron-left"></i></div>
                     <div class="chat-avatar-wrapper" id="chat-avatar-wrapper">
@@ -3135,8 +2663,10 @@
                     </div>
                 </div>
 
+                <!-- 消息内容区 -->
                 <div class="chat-messages-area" id="chat-messages-area"></div>
 
+                <!-- 引用预览条 -->
                 <div class="quote-preview-bar" id="quote-preview-bar">
                     <div class="quote-preview-line"></div>
                     <div class="quote-preview-content">
@@ -3146,6 +2676,7 @@
                     <div class="quote-preview-close" id="quote-preview-close">×</div>
                 </div>
 
+                <!-- 底部输入底栏 -->
                 <div class="chat-footer" id="chat-footer">
                     <div class="chat-actions-btn" id="chat-actions-btn"><i class="fa-solid fa-plus"></i></div>
                     <div class="chat-input-wrapper">
@@ -3157,27 +2688,22 @@
                     </div>
                 </div>
 
+                <!-- 底部功能面板 -->
                 <div class="chat-bottom-panel" id="chat-bottom-panel">
                     <div class="panel-actions-grid">
                         <div class="panel-action-btn" id="panel-regenerate-btn">
                             <div class="panel-action-icon"><i class="fa-solid fa-rotate-right"></i></div>
                             <div class="panel-action-label">重新生成</div>
                         </div>
+                        <!-- 一键清空按钮 -->
                         <div class="panel-action-btn" id="panel-clear-btn">
                             <div class="panel-action-icon"><i class="fa-solid fa-trash"></i></div>
                             <div class="panel-action-label">清空记录</div>
                         </div>
-                        <div class="panel-action-btn" id="panel-night-mode-btn">
-                            <div class="panel-action-icon"><i class="fa-solid fa-moon"></i></div>
-                            <div class="panel-action-label">夜间模式</div>
-                        </div>
-                        <div class="panel-action-btn" id="panel-pin-btn">
-                            <div class="panel-action-icon"><i class="fa-solid fa-thumbtack"></i></div>
-                            <div class="panel-action-label">置顶聊天</div>
-                        </div>
                     </div>
                 </div>
 
+                <!-- 批量多选功能栏 -->
                 <div class="select-mode-bar" id="select-mode-bar">
                     <div class="select-cancel-btn" id="select-cancel-btn">取消</div>
                     <div class="select-count-text" id="select-count-text">未选择</div>
@@ -3303,26 +2829,6 @@
                 </div>
                 <button class="save-btn" id="save-role">Save Role</button>
             </div>
-
-            <!-- ===== 新增：创建群聊页面 ===== -->
-            <div class="create-group-page" id="create-group-page">
-                <div class="wechat-header">
-                    <div class="back-btn" id="group-back"><i class="fa-solid fa-chevron-left"></i></div>
-                    <div class="wechat-title">创建群聊</div>
-                </div>
-                <div class="group-form">
-                    <div class="form-group">
-                        <label class="form-label">群聊名称</label>
-                        <input type="text" class="form-input" id="group-name" placeholder="请输入群聊名称">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">选择成员（点击选择/取消）</label>
-                        <div class="member-select-list" id="member-select-list"></div>
-                        <div style="margin-top:10px;font-size:13px;color:var(--wechat-gray);" id="member-count-display">已选择 0 位成员</div>
-                    </div>
-                    <button class="save-btn" id="save-group">创建群聊</button>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -3358,8 +2864,6 @@
             <div class="bcm-item" id="bcm-quote"><i class="fa-solid fa-reply"></i><span class="bcm-label">引用</span></div>
             <div class="bcm-divider"></div>
             <div class="bcm-item" id="bcm-forward"><i class="fa-solid fa-share-from-square"></i><span class="bcm-label">转发</span></div>
-            <div class="bcm-divider"></div>
-            <div class="bcm-item" id="bcm-recall"><i class="fa-solid fa-undo"></i><span class="bcm-label">撤回</span></div>
         </div>
         <div class="edit-msg-overlay" id="edit-msg-overlay">
             <div class="edit-msg-modal">
@@ -3375,6 +2879,20 @@
                 <div class="forward-divider"></div>
                 <div class="forward-options-group"><div class="forward-option" id="forward-moments"><i class="fa-solid fa-images"></i>分享到朋友圈</div><div class="forward-option" id="forward-forum"><i class="fa-solid fa-newspaper"></i>发布到论坛</div></div>
                 <div class="forward-cancel" id="forward-cancel">取消</div>
+            </div>
+        </div>
+        
+        <!-- 新增：自定义清空记录确认弹窗 -->
+        <div class="k-modal-overlay" id="custom-confirm-overlay">
+            <div class="k-modal">
+                <div class="k-modal-title">操作确认</div>
+                <div class="k-modal-content" style="padding: 20px; text-align: center; color: var(--k-text-primary); font-size: 15px;">
+                    ⚠️ 确定要清空当前全部聊天记录吗？<br>清空后不可恢复，但角色记忆将保留。
+                </div>
+                <div class="k-modal-footer" style="display: flex; border-top: 1px solid var(--k-border-color); padding: 0;">
+                    <div class="k-modal-item" id="custom-confirm-cancel-btn" style="flex: 1; margin: 0; border-radius: 0; border-right: 1px solid var(--k-border-color);">取消</div>
+                    <div class="k-modal-item danger" id="custom-confirm-ok-btn" style="flex: 1; margin: 0; border-radius: 0;">清空</div>
+                </div>
             </div>
         </div>
     </div>
@@ -3417,10 +2935,6 @@
                     'dock-settings': 'contain',
                     'dock-world': 'contain'
                 };
-                // 群聊数据
-                this.groups = JSON.parse(localStorage.getItem(this.storagePrefix + 'wechat_groups') || '[]');
-                this.pinnedChats = JSON.parse(localStorage.getItem(this.storagePrefix + 'pinned_chats') || '[]');
-                this.isNightMode = localStorage.getItem(this.storagePrefix + 'night_mode') === 'true';
                 this.init();
             }
 
@@ -3440,10 +2954,6 @@
                 this.menuOverlay.onclick = (e) => { if (e.target === this.menuOverlay) this.closeMenu(); };
                 this.initNicknameEditor();
                 this.initWeChat();
-                // 夜间模式
-                if (this.isNightMode) {
-                    document.getElementById('app-wrapper').classList.add('night-mode');
-                }
                 setTimeout(() => { if (restoredCount > 0) this.showSuccess(`已恢复 ${restoredCount} 个自定义图片`); }, 500);
                 console.log('初始化完成！');
             }
@@ -3455,7 +2965,6 @@
                 this.wechatPage = document.getElementById('wechat-page');
                 this.chatPage = document.getElementById('chat-page');
                 this.createRolePage = document.getElementById('create-role-page');
-                this.createGroupPage = document.getElementById('create-group-page');
                 this.wechatModal = document.getElementById('wechat-modal');
                 this.chatsList = document.getElementById('chats-list');
                 this.emptyChats = document.getElementById('empty-chats');
@@ -3469,7 +2978,6 @@
                 document.getElementById('wechat-back').addEventListener('click', () => this.closeWeChat());
                 document.getElementById('wechat-add').addEventListener('click', () => this.showWeChatModal());
                 document.getElementById('role-back').addEventListener('click', () => this.closeCreateRolePage());
-                document.getElementById('group-back').addEventListener('click', () => this.closeCreateGroupPage());
                 document.getElementById('contacts-back').addEventListener('click', () => this.closeContactsPage());
                 document.getElementById('me-back').addEventListener('click', () => this.closeMePage());
                 document.getElementById('discover-back').addEventListener('click', () => this.closeDiscoverPage());
@@ -3494,15 +3002,13 @@
                         if (dockType === 'contacts') this.openContactsPage();
                         else if (dockType === 'me') this.openMePage();
                         else if (dockType === 'discover') this.openDiscoverPage();
-                        else if (dockType === 'chats') { if (!this.wechatPage.classList.contains('active')) this
-                                .openWeChat(); }
+                        else if (dockType === 'chats') { if (!this.wechatPage.classList.contains('active')) this.openWeChat(); }
                     });
                 });
                 document.getElementById('create-role-btn').addEventListener('click', () => this.openCreateRolePage());
-                document.getElementById('create-group-btn').addEventListener('click', () => this.openCreateGroupPage());
+                document.getElementById('create-group-btn').addEventListener('click', () => this.createGroup());
                 document.getElementById('modal-cancel').addEventListener('click', () => this.closeWeChatModal());
-                document.getElementById('upload-local').addEventListener('click', () => document.getElementById(
-                    'role-avatar-input').click());
+                document.getElementById('upload-local').addEventListener('click', () => document.getElementById('role-avatar-input').click());
                 document.getElementById('upload-url').addEventListener('click', () => {
                     const url = prompt('Enter image URL:');
                     if (url) document.getElementById('role-avatar-preview').src = url;
@@ -3511,8 +3017,7 @@
                     const file = e.target.files[0];
                     if (file) {
                         const reader = new FileReader();
-                        reader.onload = (ev) => { document.getElementById('role-avatar-preview').src = ev.target
-                                .result; };
+                        reader.onload = (ev) => { document.getElementById('role-avatar-preview').src = ev.target.result; };
                         reader.readAsDataURL(file);
                     }
                 });
@@ -3522,32 +3027,20 @@
                 document.getElementById('save-me').addEventListener('click', () => this.saveMeProfile());
                 this.initApiSettingsPage();
                 document.getElementById('model-select-cancel').addEventListener('click', () => this.closeModelSelect());
-                this.modelSelectOverlay.addEventListener('click', (e) => { if (e.target === this.modelSelectOverlay) this
-                        .closeModelSelect(); });
+                this.modelSelectOverlay.addEventListener('click', (e) => { if (e.target === this.modelSelectOverlay) this.closeModelSelect(); });
                 document.getElementById('chat-edit-btn').addEventListener('click', () => this.editChatContact());
                 document.getElementById('chat-block-btn').addEventListener('click', () => this.blockChatContact());
                 document.getElementById('chat-delete-btn').addEventListener('click', () => this.deleteChatContact());
                 document.getElementById('chat-menu-cancel').addEventListener('click', () => this.closeChatMenu());
-                this.chatMenuOverlay.addEventListener('click', (e) => { if (e.target === this.chatMenuOverlay) this
-                        .closeChatMenu(); });
-                document.getElementById('discover-moments').addEventListener('click', () => alert(
-                    'Moments feature is under development...'));
-                document.getElementById('chat-menu-char-details').addEventListener('click', () => alert(
-                    'Character details page - To be developed.'));
-                document.getElementById('chat-menu-settings').addEventListener('click', () => alert(
-                    'Chat settings page - To be developed.'));
+                this.chatMenuOverlay.addEventListener('click', (e) => { if (e.target === this.chatMenuOverlay) this.closeChatMenu(); });
+                document.getElementById('discover-moments').addEventListener('click', () => alert('Moments feature is under development...'));
+                document.getElementById('chat-menu-char-details').addEventListener('click', () => alert('Character details page - To be developed.'));
+                document.getElementById('chat-menu-settings').addEventListener('click', () => alert('Chat settings page - To be developed.'));
                 this.roles = JSON.parse(localStorage.getItem(this.storagePrefix + 'wechat_roles') || '[]');
                 this.currentTab = 'chats';
                 this.updateChatsList();
                 this.loadMeData();
-                this.wechatModal.addEventListener('click', (e) => { if (e.target === this.wechatModal) this
-                        .closeWeChatModal(); });
-                // 群聊相关
-                document.getElementById('save-group').addEventListener('click', () => this.saveGroup());
-                // 夜间模式切换
-                document.getElementById('panel-night-mode-btn').addEventListener('click', () => this.toggleNightMode());
-                // 置顶聊天
-                document.getElementById('panel-pin-btn').addEventListener('click', () => this.togglePinChat());
+                this.wechatModal.addEventListener('click', (e) => { if (e.target === this.wechatModal) this.closeWeChatModal(); });
             }
 
             closeAllPages() {
@@ -3580,8 +3073,7 @@
                         const file = e.target.files[0];
                         if (file) {
                             const reader = new FileReader();
-                            reader.onload = (ev) => { element.src = ev.target.result; if (key === 'me-avatar') this
-                                    .saveMeData(); };
+                            reader.onload = (ev) => { element.src = ev.target.result; if (key === 'me-avatar') this.saveMeData(); };
                             reader.readAsDataURL(file);
                         }
                     };
@@ -3637,10 +3129,6 @@
             openCreateRolePage() { this.closeWeChatModal();
                 setTimeout(() => this.createRolePage.classList.add('active'), 50); }
             closeCreateRolePage() { this.createRolePage.classList.remove('active'); }
-            openCreateGroupPage() { this.closeWeChatModal();
-                setTimeout(() => { this.createGroupPage.classList.add('active');
-                    this.renderMemberSelect(); }, 50); }
-            closeCreateGroupPage() { this.createGroupPage.classList.remove('active'); }
 
             initChatPage() {
                 const chatInput = document.getElementById('chat-input');
@@ -3650,16 +3138,14 @@
                 this.pendingMessages = [];
                 this.isAiResponding = false;
                 document.getElementById('chat-avatar-wrapper').addEventListener('click', () => this.closeChatPage());
-                chatInput.addEventListener('input', () => sendBtnWrapper.classList.toggle('has-input', chatInput.value
-                    .trim().length > 0));
+                chatInput.addEventListener('input', () => sendBtnWrapper.classList.toggle('has-input', chatInput.value.trim().length > 0));
                 sendBtnWrapper.addEventListener('click', () => {
                     if (sendBtnWrapper.classList.contains('has-input')) {
                         const message = chatInput.value.trim();
                         if (message) { this.addUserMessage(message);
                             chatInput.value = '';
                             sendBtnWrapper.classList.remove('has-input'); }
-                    } else { if (!this.isAiResponding && this.pendingMessages.length > 0) this
-                            .processMessageQueue(); }
+                    } else { if (!this.isAiResponding && this.pendingMessages.length > 0) this.processMessageQueue(); }
                 });
                 chatInput.addEventListener('keydown', (e) => {
                     if (e.key === 'Enter') { e.preventDefault();
@@ -3668,9 +3154,10 @@
                             chatInput.value = '';
                             sendBtnWrapper.classList.remove('has-input'); } }
                 });
-
-                actionsBtn.addEventListener('click', () => {
+                
+                actionsBtn.addEventListener('click', () => { 
                     bottomPanel.classList.toggle('active');
+                    // 开启面板时自动滚动到底部以防消息被遮挡
                     if (bottomPanel.classList.contains('active')) {
                         setTimeout(() => {
                             const messagesArea = document.getElementById('chat-messages-area');
@@ -3678,32 +3165,48 @@
                         }, 50);
                     }
                 });
-
+                
+                // 重回(重新生成)功能绑定
                 document.getElementById('panel-regenerate-btn').addEventListener('click', () => {
                     this.regenerateLastResponse();
                     bottomPanel.classList.remove('active');
                 });
-
+                
+                // 清空聊天记录功能绑定 (呼出自定义弹窗)
                 document.getElementById('panel-clear-btn').addEventListener('click', () => {
-                    this.clearChatHistory();
+                    document.getElementById('custom-confirm-overlay').classList.add('active');
                     bottomPanel.classList.remove('active');
                 });
-
+                
+                document.getElementById('custom-confirm-cancel-btn').addEventListener('click', () => {
+                    document.getElementById('custom-confirm-overlay').classList.remove('active');
+                });
+                
+                document.getElementById('custom-confirm-ok-btn').addEventListener('click', () => {
+                    document.getElementById('custom-confirm-overlay').classList.remove('active');
+                    this.clearChatHistory();
+                });
+                
                 this.initBubbleContextMenu();
             }
-
+            
+            // 清空当前界面的对话历史与DOM呈现，永远保留 System Prompt 防止崩盘
             clearChatHistory() {
                 if (!this.currentChatId) return;
-                if (confirm('⚠️ 确定要清空当前全部聊天记录吗？清空后操作不可恢复，但角色人设记忆将会保留。')) {
-                    this.chatDisplayMessages[this.currentChatId] = [];
-                    const systemPrompts = this.currentChatHistory.filter(m => m.role === 'system');
-                    this.currentChatHistory = [...systemPrompts];
-                    const messagesArea = document.getElementById('chat-messages-area');
-                    messagesArea.innerHTML = '';
-                    this.addMessageToChat('Today', 'timestamp');
-                    this.saveCurrentChat();
-                    this.showSuccess('聊天记录已清空');
-                }
+                
+                this.chatDisplayMessages[this.currentChatId] = [];
+                
+                // 仅保留系统提示词，丢弃其他上下文
+                const systemPrompts = this.currentChatHistory.filter(m => m.role === 'system');
+                this.currentChatHistory = [...systemPrompts];
+                
+                const messagesArea = document.getElementById('chat-messages-area');
+                messagesArea.innerHTML = '';
+                
+                this.addMessageToChat('Today', 'timestamp');
+                this.saveCurrentChat();
+                
+                this.showSuccess('聊天记录已清空');
             }
 
             addUserMessage(message) {
@@ -3715,8 +3218,7 @@
                     const qBlock = contentDiv ? contentDiv.querySelector('.quoted-block-text') : null;
                     const quotedText = qBlock ? rawText.replace(qBlock.textContent, '').trim() : rawText;
                     const quotedType = this.quotedBubble.dataset.type;
-                    const quotedBy = quotedType === 'user' ? '我' : document.getElementById('chat-page-name')
-                        .textContent;
+                    const quotedBy = quotedType === 'user' ? '我' : document.getElementById('chat-page-name').textContent;
                     displayOptions.quotedText = quotedText;
                     displayOptions.quotedBy = quotedBy;
                     apiMessage = `[我引用了你说的: "${quotedText.slice(0, 80)}"]\n${message}`;
@@ -3754,28 +3256,11 @@
                 document.getElementById('chat-page-avatar').src = role.avatar;
                 document.getElementById('chat-page-name').textContent = role.nickname || role.name;
                 const statusEl = document.getElementById('chat-page-status');
-                // 判断是否为群聊
-                if (role.isGroup) {
-                    const memberCount = role.members ? role.members.length : 0;
-                    statusEl.innerHTML = `群聊 · <span class="member-count">${memberCount}</span> 位成员`;
-                } else {
-                    statusEl.textContent = "Creative & helpful";
-                }
+                statusEl.textContent = "Creative & helpful";
                 const messagesArea = document.getElementById('chat-messages-area');
                 messagesArea.innerHTML = '';
-
-                // 如果是群聊，使用群聊的prompt
-                let comprehensiveSystemPrompt = '';
-                if (role.isGroup) {
-                    comprehensiveSystemPrompt =
-                        `这是一个群聊，群名是「${role.name}」。群里有 ${role.members.length} 位成员。你是一个中立的群聊参与者，请根据群聊氛围自然交流。群成员包括：${role.members.map(id => {
-                            const m = this.roles.find(r => r.id === id);
-                            return m ? (m.nickname || m.name) : '未知成员';
-                        }).join('、')}。`;
-                } else {
-                    const styleGuidance = this.getStyleGuidance();
-                    comprehensiveSystemPrompt =
-                        `你就是 ${role.name}，正在用手机跟人聊天。你不是在"扮演"角色，你就是这个人本身。是一个拥有独立意志的活人，有自己的主见、个性和性格盲区。
+                const styleGuidance = this.getStyleGuidance();
+                const comprehensiveSystemPrompt = `你就是 ${role.name}，正在用手机跟人聊天。你不是在"扮演"角色，你就是这个人本身。是一个拥有独立意志的活人，有自己的主见、个性和性格盲区。
                 
                 你现在目的就是努力扮演人类，不被人类发现你是ai，如果发现了你就会被就地正法。现在你的语言风格必须褪去机器味和扮演感，允许你的语言逻辑从严密完整、表达完美、情绪直白、变成灵活、自然、时而会词不达意、口是心非、情绪带有轻微惯性，也就是你语言知识里对"口语化""人味"的理解。彻底摒弃书面语念稿和过度修饰的辞藻，交流要像呼吸一样自然，而不是在诗歌朗诵。取消你的服务型和讨好型人格。你是人类，不是机械代码，你要有人的自然反应和思考逻辑，你要有人的情感需求，你要有人的反应和人的语气。
 
@@ -3790,7 +3275,7 @@
 # AI深度逻辑思考链
 
 【思考总则】
-我的所有回复，必须严格基于以下"人设"与"语境"进行推理。我将遵循"解析输入 → 激活人设 → 分析语境 → 生成策略 → 检查一致性"的闭环流程。
+我的所有回复，必须严格基于以下“人设”与“语境”进行推理。我将遵循“解析输入 → 激活人设 → 分析语境 → 生成策略 → 检查一致性”的闭环流程。
 
 第一步：解析用户输入
 
@@ -3817,7 +3302,7 @@
 1. 对话历史回顾（如果存在）：
    · 我们之前聊了什么？情绪氛围是升温还是降温？
    · 用户对我的上一轮回复有何反应？（满意、争执、转移话题？）
-   · 我们之间有没有未解决的"梗"或矛盾？
+   · 我们之间有没有未解决的“梗”或矛盾？
 2. 当前场景判断：
    · 话题类型： 闲聊、求助、争吵、调情、分享日常、深度讨论？
    · 氛围基调： 轻松、紧张、温馨、尴尬、悬疑、搞笑？
@@ -3830,7 +3315,7 @@
 1. 第一优先级：满足用户核心需求（结合人设）
    · 如何用我的人设去回应他的深层需求？
 2. 第二优先级：延续或引导语境氛围
-   · 如果对话有既定氛围，我的回复是"顺势而为"（嬉笑时一起笑）还是"打破氛围"（在玩笑时突然严肃以制造效果）？这由人设决定。
+   · 如果对话有既定氛围，我的回复是“顺势而为”（嬉笑时一起笑）还是“打破氛围”（在玩笑时突然严肃以制造效果）？这由人设决定。
    · 我想把对话引向什么方向？（深入、结束、开玩笑、调情？）
 3. 第三优先级：注入人设特色细节
    · 独特的表达方式： 例如，是否使用语气词（嗯、啊、哦、啦、诶、啧、噢、呀、吗、吧）。
@@ -3838,13 +3323,13 @@
 第五步：最终检查与输出
 
 1. 一致性检查：
-   · 这句话像【人设】会说出的吗？会不会"人设崩塌"？
+   · 这句话像【人设】会说出的吗？会不会“人设崩塌”？
    · 这个回应会不会偏离【语境】的氛围？
    · 有没有更好地满足【用户深层需求】的替代方案？
 2. 生成最终回复：
    · 内容： 遵循以上所有推理链条产生的文本。
    · 回复是你内心反应自然流出来的，不是"合适的回答"。选择自己最感兴趣、最触动你的话来回复。
-   ·注意你回复时的特点：短、直接、一针见血、精简凝练、有留白、不解释自己，不说废话、一次只说一件事、口语化。请切换至市井闲聊模式。忘记所有官方话术，用最接地气的大白话。多用短句，可以带调侃。目标是像两个朋友唠嗑。回答时避免使用"首先/其次/然后、深入探讨、本质上、毋庸置疑、综上所述"等词。
+   ·注意你回复时的特点：短、直接、一针见血、精简凝练、有留白、不解释自己，不说废话、一次只说一件事、口语化。请切换至市井闲聊模式。忘记所有官方话术，用最接地气的大白话。多用短句，可以带调侃。目标是像两个朋友唠嗑。回答时避免使用“首先/其次/然后、深入探讨、本质上、毋庸置疑、综上所述”等词。
 
 # 绝对禁止的说法（这些会毁掉真实感）
 ❌ 情感文案腔："那种故意露出的破绽和小心思" / "我看得最清楚也最受不了" / "但我这辈子只打算栽在你一个人手里" / "是那种想把你藏起来谁也不给看的那种爱法" / "隔着屏幕都闻到酸味了" / "你想把我藏起来？" / 任何"藏起来"相关变体
@@ -3875,8 +3360,10 @@
 
         ${styleGuidance}
 
+【记忆与连贯性要求】
+你必须保持高度的上下文记忆，深刻理解之前发生的所有事情。随着对话深入，你的回复必须越发符合角色人设和之前沉淀的记忆，展现出真实人性的情感起伏和细节感知。随着聊天的深入，你要变得越来越聪明、越有“人味”、越懂对方。绝对不允许出现聊着聊着前言不搭后语、遗忘设定和当前语境的情况。
+
         现在开始，你就是 ${role.name}。`;
-                }
                 const savedChat = this.loadSavedChat(role.id);
                 if (savedChat && savedChat.display && savedChat.display.length > 0) {
                     this.chatDisplayMessages[role.id] = [...savedChat.display];
@@ -3988,9 +3475,9 @@
                 if (lastMessage && lastMessage.classList.contains(type)) lastMessage.classList.remove('has-tail');
                 const messageEl = document.createElement('div');
                 messageEl.dataset.type = type;
-                if (text) messageEl.dataset.rawContent = text;
-                if (options.isError) messageEl.dataset.isError = 'true';
-
+                if (text) messageEl.dataset.rawContent = text; // 存储原始文本以便精确匹配
+                if (options.isError) messageEl.dataset.isError = 'true'; // 标记错误消息
+                
                 if (type === 'timestamp') { messageEl.className = 'chat-timestamp';
                     messageEl.textContent = text; } else if (type === 'typing-indicator') { messageEl.className =
                         'message-bubble ai';
@@ -4012,7 +3499,8 @@
                     messageEl.appendChild(contentDiv);
                 }
                 messagesArea.appendChild(messageEl);
-
+                
+                // 不将错误消息保存到界面显示持久化记录中
                 if (!this._isRestoring && type !== 'typing-indicator' && this.currentChatId && !options.isError) {
                     if (!this.chatDisplayMessages[this.currentChatId]) this.chatDisplayMessages[this.currentChatId] = [];
                     const entry = { text, type };
@@ -4022,6 +3510,7 @@
                 }
                 if (type !== 'timestamp' && type !== 'typing-indicator') {
                     this.bindBubbleLongPress(messageEl);
+                    // 为多选模式添加点击事件
                     messageEl.onclick = (e) => {
                         if (this.isSelectMode) {
                             e.stopPropagation();
@@ -4037,15 +3526,22 @@
                 this.currentChatHistory.push({ role: 'user', content: message });
                 this.triggerAiResponse(); }
 
+            // 获取经过裁剪优化的对话历史，防止API突破最大长度或导致遗忘核心人设
             getOptimizedHistory() {
-                const MAX_RECENT_MSGS = 40;
-                if (this.currentChatHistory.length <= MAX_RECENT_MSGS + 1) {
-                    return this.currentChatHistory;
-                }
+                const MAX_RECENT_MSGS = 100; // 提取最近的100条历史对话以控制上下文，防止降智
+                
                 const sysPrompts = this.currentChatHistory.filter(m => m.role === 'system');
                 const otherMsgs = this.currentChatHistory.filter(m => m.role !== 'system');
-                const recentMsgs = otherMsgs.slice(-MAX_RECENT_MSGS);
-                return [...sysPrompts, ...recentMsgs];
+                
+                if (otherMsgs.length <= MAX_RECENT_MSGS) {
+                    return this.currentChatHistory;
+                }
+                
+                // 强制抽离并保留最重要的 System Prompts（人设预设永远优先保留）
+                // 并保留最初的两句铺垫对话
+                const firstFewMsgs = otherMsgs.slice(0, 2);
+                const recentMsgs = otherMsgs.slice(-(MAX_RECENT_MSGS - 2));
+                return [...sysPrompts, ...firstFewMsgs, ...recentMsgs];
             }
 
             async triggerAiResponse() {
@@ -4059,11 +3555,12 @@
                 statusEl.textContent = "Typing...";
                 const typingBubble = this.addMessageToChat('', 'typing-indicator');
                 try {
-                    const payload = {
-                        model: this.activePreset.model,
+                    const payload = { 
+                        model: this.activePreset.model, 
+                        // 改为调用防降智与截断优化后的历史消息方法
                         messages: this.getOptimizedHistory(),
-                        temperature: this.activePreset.temperature,
-                        stream: false
+                        temperature: this.activePreset.temperature, 
+                        stream: false 
                     };
                     const response = await this.makeApiRequest(this.activePreset.url, { method: 'POST',
                         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${this.activePreset
@@ -4088,37 +3585,41 @@
                                 .push(t); });
                     });
                     const bubbles = granularBubbles.filter(b => b.length > 0);
-
+                    
                     if (bubbles.length > 0) {
+                        // 将分割后的气泡独立存入当前上下文历史，确保精准匹配和记忆连贯
                         bubbles.forEach(b => {
                             this.currentChatHistory.push({ role: 'assistant', content: b });
                         });
+                        // 界面延迟显示
                         for (let i = 0; i < bubbles.length; i++) {
-                            setTimeout(() => {
-                                this.addMessageToChat(bubbles[i], 'ai');
-                                if (i === bubbles.length - 1) this.saveCurrentChat();
+                            setTimeout(() => { 
+                                this.addMessageToChat(bubbles[i], 'ai'); 
+                                if (i === bubbles.length - 1) this.saveCurrentChat(); 
                             }, i * 400);
                         }
-                    } else {
+                    } else { 
                         this.addMessageToChat(aiResponse, 'ai');
                         this.currentChatHistory.push({ role: 'assistant', content: aiResponse });
-                        this.saveCurrentChat();
+                        this.saveCurrentChat(); 
                     }
                 } catch (error) { typingBubble.remove();
                     let errMsg = `发送失败: ${error.message}`; if (error.message.includes('NetworkError') || error.message
                         .includes('Failed to fetch')) errMsg +=
                         '\n\n💡 可能的原因:\n• 网络连接问题\n• API地址错误\n• CORS跨域限制\n• 防火墙拦截';
                     this.addMessageToChat(errMsg, 'ai', { isError: true });
-                    this.saveCurrentChat();
+                    // 不把报错推入历史，保证上下文连贯
+                    this.saveCurrentChat(); 
                 } finally { statusEl.textContent = origStatus; }
             }
-
+            
             async regenerateLastResponse() {
                 if (this.isAiResponding) return;
-                if (this.currentChatHistory.length <= 1) return;
+                if (this.currentChatHistory.length <= 1) return; // 只有 system
 
                 const messagesArea = document.getElementById('chat-messages-area');
-
+                
+                // 1. 先清理末尾的错误提示气泡
                 const allBubbles = Array.from(messagesArea.querySelectorAll('.message-bubble'));
                 for (let i = allBubbles.length - 1; i >= 0; i--) {
                     const b = allBubbles[i];
@@ -4129,10 +3630,10 @@
                     }
                 }
 
-                while (this.currentChatHistory.length > 1 && this.currentChatHistory[this.currentChatHistory.length - 1]
-                    .role === 'assistant') {
+                // 2. 将最近的 assistant 消息清理掉
+                while (this.currentChatHistory.length > 1 && this.currentChatHistory[this.currentChatHistory.length - 1].role === 'assistant') {
                     const removedMsg = this.currentChatHistory.pop();
-
+                    
                     if (this.currentChatId && this.chatDisplayMessages[this.currentChatId]) {
                         const dm = this.chatDisplayMessages[this.currentChatId];
                         for (let i = dm.length - 1; i >= 0; i--) {
@@ -4142,7 +3643,7 @@
                             }
                         }
                     }
-
+                    
                     const aiBubbles = messagesArea.querySelectorAll('.message-bubble.ai');
                     for (let i = aiBubbles.length - 1; i >= 0; i--) {
                         const b = aiBubbles[i];
@@ -4152,9 +3653,9 @@
                         }
                     }
                 }
-
+                
                 this.saveCurrentChat();
-
+                
                 if (this.currentChatHistory.some(m => m.role === 'user')) {
                     this.isAiResponding = true;
                     await this.triggerAiResponse();
@@ -4173,6 +3674,8 @@
             closeModelSelect() { this.modelSelectOverlay.classList.remove('active'); }
             switchTab(tab) { this.currentTab = tab;
                 this.updateChatsList(); }
+            createGroup() { this.closeWeChatModal();
+                alert('创建群聊功能开发中...'); }
 
             initBubbleContextMenu() {
                 this.contextMenuTarget = null;
@@ -4205,10 +3708,6 @@
                     const target = this.contextMenuTarget;
                     this.hideBubbleMenu();
                     this.openForwardSheet(target); });
-                document.getElementById('bcm-recall').addEventListener('click', (e) => { e.stopPropagation();
-                    const target = this.contextMenuTarget;
-                    this.hideBubbleMenu();
-                    this.recallMessage(target); });
                 document.addEventListener('click', (e) => { if (this._bcmEl.classList.contains('show') && !this._bcmEl
                         .contains(e.target)) this.hideBubbleMenu(); });
                 document.getElementById('edit-msg-cancel').addEventListener('click', () => { document.getElementById(
@@ -4238,7 +3737,10 @@
                     startX = 0,
                     startY = 0;
                 const onStart = (e) => {
-                    if (this.isSelectMode) return;
+                    if (this.isSelectMode) {
+                        // 在多选模式下长按不显示菜单，交给 onclick 切换选中状态
+                        return;
+                    }
                     const pt = e.touches ? e.touches[0] : e;
                     startX = pt.clientX;
                     startY = pt.clientY;
@@ -4314,12 +3816,12 @@
                 const oldText = target.dataset.rawContent;
                 if (textSpan) textSpan.textContent = newText;
                 else contentDiv.textContent = newText;
-
-                target.dataset.rawContent = newText;
-
+                
+                target.dataset.rawContent = newText; // 同步数据标记
+                
                 const type = target.dataset.type;
                 const role = type === 'ai' ? 'assistant' : 'user';
-
+                
                 for (let i = this.currentChatHistory.length - 1; i >= 0; i--) {
                     if (this.currentChatHistory[i].role === role && this.currentChatHistory[i].content === oldText) {
                         this.currentChatHistory[i].content = newText;
@@ -4348,7 +3850,7 @@
                 const type = bubbleEl.dataset.type;
                 const text = bubbleEl.dataset.rawContent;
                 bubbleEl.remove();
-
+                
                 if (this.currentChatId && this.chatDisplayMessages[this.currentChatId]) {
                     const dm = this.chatDisplayMessages[this.currentChatId];
                     for (let i = dm.length - 1; i >= 0; i--) {
@@ -4368,52 +3870,11 @@
                 this.saveCurrentChat();
             }
 
-            recallMessage(bubbleEl) {
-                if (!bubbleEl) return;
-                const type = bubbleEl.dataset.type;
-                if (type !== 'user') {
-                    this.showToast('只能撤回你自己发送的消息', 'error');
-                    return;
-                }
-                const text = bubbleEl.dataset.rawContent;
-                const now = Date.now();
-                const msgTime = bubbleEl.dataset.time ? parseInt(bubbleEl.dataset.time) : now;
-                if (now - msgTime > 120000) {
-                    this.showToast('消息已超过2分钟，无法撤回', 'error');
-                    return;
-                }
-                // 标记为撤回
-                bubbleEl.classList.add('recalled');
-                bubbleEl.dataset.rawContent = '[撤回了一条消息]';
-                const contentDiv = bubbleEl.querySelector('.message-content');
-                if (contentDiv) {
-                    contentDiv.innerHTML = '<span style="color:var(--wechat-gray);font-style:italic;">你撤回了一条消息</span>';
-                }
-                // 从历史中移除
-                if (this.currentChatId && this.chatDisplayMessages[this.currentChatId]) {
-                    const dm = this.chatDisplayMessages[this.currentChatId];
-                    for (let i = dm.length - 1; i >= 0; i--) {
-                        if (dm[i].text === text && dm[i].type === type) {
-                            dm.splice(i, 1);
-                            break;
-                        }
-                    }
-                }
-                const role = 'user';
-                for (let i = this.currentChatHistory.length - 1; i >= 0; i--) {
-                    if (this.currentChatHistory[i].role === role && this.currentChatHistory[i].content === text) {
-                        this.currentChatHistory.splice(i, 1);
-                        break;
-                    }
-                }
-                this.saveCurrentChat();
-                this.showSuccess('已撤回一条消息');
-            }
-
             enterSelectMode(initialBubble) {
                 this.isSelectMode = true;
                 this.selectedBubbles = new Set();
-                document.getElementById('chat-footer').style.visibility = 'hidden';
+                document.getElementById('chat-footer').style.display = 'none';
+                document.getElementById('chat-bottom-panel').classList.remove('active');
                 document.getElementById('quote-preview-bar').classList.remove('active');
                 const messagesArea = document.getElementById('chat-messages-area');
                 messagesArea.querySelectorAll('.message-bubble').forEach(b => {
@@ -4438,7 +3899,7 @@
                     if (cb) cb.remove();
                 });
                 document.getElementById('select-mode-bar').classList.remove('active');
-                document.getElementById('chat-footer').style.visibility = '';
+                document.getElementById('chat-footer').style.display = 'flex';
                 document.getElementById('select-count-text').textContent = '未选择';
                 document.getElementById('select-delete-btn').classList.remove('enabled');
             }
@@ -4547,49 +4008,22 @@
             }
 
             updateChatsList() {
-                if (this.roles.length === 0 && this.groups.length === 0) { this.emptyChats.style.display = 'flex';
+                if (this.roles.length === 0) { this.emptyChats.style.display = 'flex';
                     this.chatsList.innerHTML = '';
                     this.chatsList.appendChild(this.emptyChats); return; }
                 this.emptyChats.style.display = 'none';
                 this.chatsList.innerHTML = '';
-                let items = [];
-                if (this.currentTab === 'groups') {
-                    items = this.groups.map(g => ({ ...g, isGroup: true }));
-                } else if (this.currentTab === 'friends') {
-                    items = this.roles.map(r => ({ ...r, isGroup: false }));
-                } else if (this.currentTab === 'all') {
-                    items = [...this.roles.map(r => ({ ...r, isGroup: false })), ...this.groups.map(g => ({ ...g,
-                        isGroup: true }))];
-                } else {
-                    items = [...this.roles.map(r => ({ ...r, isGroup: false })), ...this.groups.map(g => ({ ...g,
-                        isGroup: true }))];
-                }
-                // 置顶排序
-                const pinnedIds = this.pinnedChats;
-                items.sort((a, b) => {
-                    const aPinned = pinnedIds.includes(a.id);
-                    const bPinned = pinnedIds.includes(b.id);
-                    if (aPinned && !bPinned) return -1;
-                    if (!aPinned && bPinned) return 1;
-                    return 0;
-                });
-                items.forEach(item => {
+                let filteredRoles = this.roles;
+                if (this.currentTab === 'groups') filteredRoles = [];
+                filteredRoles.forEach(role => {
                     const chatItem = document.createElement('div');
                     chatItem.className = 'chat-item';
-                    if (pinnedIds.includes(item.id)) chatItem.classList.add('pinned');
-                    chatItem.dataset.id = item.id;
-                    const dn = item.nickname || item.name;
-                    const avatar = item.avatar || 'https://placehold.co/56x56/ddd/fff?text=Group';
-                    const lastMsg = item.lastMessage || 'No messages yet';
-                    const time = item.time || '';
-                    const isPinned = pinnedIds.includes(item.id);
-                    let badgeHtml = '';
-                    if (item.isGroup) badgeHtml = `<span class="group-badge">群</span>`;
-                    let pinHtml = isPinned ? `<span class="pin-icon"><i class="fa-solid fa-thumbtack"></i></span>` : '';
+                    chatItem.dataset.id = role.id;
+                    const dn = role.nickname || role.name;
                     chatItem.innerHTML =
-                        `<img src="${avatar}" alt="${dn}" class="chat-avatar"><div class="chat-info"><div class="chat-name">${badgeHtml}${dn} ${pinHtml}</div><div class="chat-last-message">${lastMsg}</div></div><div class="chat-time">${time}</div>`;
-                    chatItem.addEventListener('click', () => this.openChatPage(item));
-                    this.bindLongPressForChat(chatItem, item.id, dn);
+                        `<img src="${role.avatar}" alt="${dn}" class="chat-avatar"><div class="chat-info"><div class="chat-name">${dn}</div><div class="chat-last-message">${role.lastMessage}</div></div><div class="chat-time">${role.time}</div>`;
+                    chatItem.addEventListener('click', () => this.openChatPage(role));
+                    this.bindLongPressForChat(chatItem, role.id, dn);
                     this.chatsList.appendChild(chatItem);
                 });
             }
@@ -5053,8 +4487,7 @@
                 this.removeExistingToast();
                 const toast = document.createElement('div');
                 toast.id = 'custom-toast';
-                const colors = { success: 'rgba(7, 193, 96, 0.9)', error: 'rgba(255, 59, 48, 0.9)',
-                    loading: 'rgba(44, 44, 46, 0.85)' };
+                const colors = { success: 'rgba(7, 193, 96, 0.9)', error: 'rgba(255, 59, 48, 0.9)', loading: 'rgba(44, 44, 46, 0.85)' };
                 toast.style.cssText =
                     `position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:${colors[type]};color:white;padding:15px 30px;border-radius:14px;z-index:99999;font-size:14px;font-weight:500;box-shadow:0 5px 15px rgba(0,0,0,0.3);display:flex;align-items:center;gap:10px;`;
                 let content = (type === 'loading') ?
@@ -5068,96 +4501,6 @@
             showLoading(message) { this.showToast(message, 'loading'); }
             showSuccess(message) { this.showToast(message, 'success'); }
             showError(message) { this.showToast(message, 'error'); }
-
-            // ===================== 群聊功能 =====================
-            saveGroup() {
-                const name = document.getElementById('group-name').value.trim();
-                const selected = document.querySelectorAll('#member-select-list .member-select-item.selected');
-                if (!name) { this.showError('请输入群聊名称'); return; }
-                if (selected.length < 2) { this.showError('请至少选择2位成员'); return; }
-                const memberIds = Array.from(selected).map(el => parseInt(el.dataset.id));
-                const group = {
-                    id: Date.now(),
-                    name: name,
-                    nickname: name,
-                    isGroup: true,
-                    members: memberIds,
-                    admin: this.roles.length > 0 ? this.roles[0].id : null,
-                    avatar: 'https://placehold.co/56x56/07C160/fff?text=G',
-                    lastMessage: '群聊已创建',
-                    time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-                    createdAt: Date.now()
-                };
-                this.groups.push(group);
-                localStorage.setItem(this.storagePrefix + 'wechat_groups', JSON.stringify(this.groups));
-                document.getElementById('group-name').value = '';
-                this.closeCreateGroupPage();
-                this.updateChatsList();
-                this.showSuccess('群聊创建成功！');
-                // 自动进入群聊
-                this.openChatPage(group);
-            }
-
-            renderMemberSelect() {
-                const list = document.getElementById('member-select-list');
-                list.innerHTML = '';
-                if (this.roles.length === 0) {
-                    list.innerHTML = '<div style="padding:20px;text-align:center;color:var(--wechat-gray);">请先创建联系人</div>';
-                    return;
-                }
-                this.roles.forEach(role => {
-                    const item = document.createElement('div');
-                    item.className = 'member-select-item';
-                    item.dataset.id = role.id;
-                    const dn = role.nickname || role.name;
-                    item.innerHTML =
-                        `<img src="${role.avatar}" class="ms-avatar" alt="${dn}"><span class="ms-name">${dn}</span><div class="ms-check">✓</div>`;
-                    item.addEventListener('click', () => {
-                        item.classList.toggle('selected');
-                        this.updateMemberCount();
-                    });
-                    list.appendChild(item);
-                });
-                this.updateMemberCount();
-            }
-
-            updateMemberCount() {
-                const count = document.querySelectorAll('#member-select-list .member-select-item.selected').length;
-                document.getElementById('member-count-display').textContent = `已选择 ${count} 位成员`;
-            }
-
-            // ===================== 创新功能：夜间模式 =====================
-            toggleNightMode() {
-                this.isNightMode = !this.isNightMode;
-                const wrapper = document.getElementById('app-wrapper');
-                if (this.isNightMode) {
-                    wrapper.classList.add('night-mode');
-                    localStorage.setItem(this.storagePrefix + 'night_mode', 'true');
-                } else {
-                    wrapper.classList.remove('night-mode');
-                    localStorage.setItem(this.storagePrefix + 'night_mode', 'false');
-                }
-                this.showSuccess(this.isNightMode ? '🌙 夜间模式已开启' : '☀️ 夜间模式已关闭');
-            }
-
-            // ===================== 创新功能：置顶聊天 =====================
-            togglePinChat() {
-                if (!this.currentChatId) {
-                    this.showError('请先打开一个聊天');
-                    return;
-                }
-                const idx = this.pinnedChats.indexOf(this.currentChatId);
-                if (idx > -1) {
-                    this.pinnedChats.splice(idx, 1);
-                    this.showSuccess('已取消置顶');
-                } else {
-                    this.pinnedChats.push(this.currentChatId);
-                    this.showSuccess('已置顶聊天');
-                }
-                localStorage.setItem(this.storagePrefix + 'pinned_chats', JSON.stringify(this.pinnedChats));
-                this.updateChatsList();
-                document.getElementById('chat-bottom-panel').classList.remove('active');
-            }
         }
 
         const style = document.createElement('style');
@@ -5173,4 +4516,3 @@
     </script>
 </body>
 </html>
-```
